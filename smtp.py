@@ -1,4 +1,3 @@
-import sys
 import socket
 
 # gmail.com       MX preference = 20, mail exchanger = alt2.gmail-smtp-in.l.google.com
@@ -7,21 +6,22 @@ import socket
 # gmail.com       MX preference = 10, mail exchanger = alt1.gmail-smtp-in.l.google.com
 
 if __name__ == '__main__':
-    MAIL_SERVER = str(input('Destination Server: '))     # '64.233.184.26'
+    MAIL_SERVER = str(input('Destination Server: '))
     PORT = 25
-    EMAIL_FROM = str(input('Email from: '))       # 'your_boy@email.com'
-    RECPT_EMAIL = str(input('Recipient Email: ')) # 'fskycreery@gmail.com'
-    SUBJECT = str(input('Subject: '))             # 'Relationship'
-    BODY = str(input('Body: '))                   # 'your the best in the world!'
+    EMAIL_FROM = str(input('Email from: '))
+    RECPT_EMAIL = str(input('Recipient Email: '))
+    SUBJECT = str(input('Subject: '))
+    BODY = str(input('Body: '))
 
-    commands = [f"HELO {MAIL_SERVER}\r\n",
+    commands = [
+        f"HELO {MAIL_SERVER}\r\n",
         f"MAIL FROM:<{EMAIL_FROM}>\r\n",
         f"RCPT TO:<{RECPT_EMAIL}>\r\n",
         f"DATA\r\n",
         f"From: <{EMAIL_FROM}>\r\nTo: <{RECPT_EMAIL}>\r\nSubject: {SUBJECT}\r\n\r\n{BODY}\r\n.\r\n",
         "QUIT\r\n"
     ]
-    
+
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((MAIL_SERVER, PORT))
     
